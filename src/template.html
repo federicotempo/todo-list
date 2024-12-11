@@ -1,33 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Todo List</title>
-
-</head>
-<body>
-  <header>
-    <h1>Todo List</h1>
-    <button id="toggle-sidebar" aria-label="Open menu">&#9776;</button>
-  </header>
-  <div class="container">
-    <nav class="sidebar">
-      <ul>
-        <li><a href="#">Work Tasks</a></li>
-        <li><a href="#">Bills to Pay</a></li>
-        <li><a href="#">Personal Reminders</a></li>
-      </ul>
-    </nav>
-    <main>
-      <h2>My tasks</h2>
-      <ul id="task-list">
-      </ul>
-      <form id="task-form">
-        <input type="text" id="new-task" placeholder="New Task" required>
-        <button type="submit">Add</button>
-      </form>
-    </main>
-
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo List</title>
+  </head>
+  <body>
+    <header>
+      <h1>Todo List</h1>
+      <button id="toggle-sidebar" aria-label="Open menu">&#9776;</button>
+    </header>
+    <div class="container">
+      <nav class="sidebar">
+        <ul id="project-list"></ul>
+      </nav>
+      <main>
+        <div id="project-title"></div>
+        <ul id="task-list"></ul>
+      </main>
+    </div>
+  </body>
 </html>
