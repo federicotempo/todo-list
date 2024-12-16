@@ -96,17 +96,11 @@ header button {
   transition: transform 0.3s ease;
 }
 
-.sidebar ul {
-  list-style: none;
-}
-
 .sidebar ul li {
   margin-bottom: 1rem;
-}
-
-.sidebar ul li a {
-  text-decoration: none;
-  color: #333;
+  text-decoration: underline;
+  cursor: pointer;
+  list-style: none;
 }
 
 main {
@@ -119,31 +113,17 @@ main h2 {
   margin-bottom: 1rem;
 }
 
-#task-form {
-  display: flex;
-  margin-top: 1rem;
-}
-
-#task-form input {
-  flex: 1;
-  padding: 0.5rem;
-  margin-right: 0.5rem;
-}
-
-#task-form button {
-  padding: 0.5rem 1rem;
-  background-color: #4caf50;
-  color: white;
-  border: none;
-  cursor: pointer;
+#project-title {
+  color: #4c70af;
+  font-size: 2rem;
 }
 
 @media (max-width: 768px) {
   .sidebar {
     position: fixed;
-    top: 60px;
+    top: 83.2px;
     left: 0;
-    height: calc(100vh - 60px);
+    height: calc(100vh - 83.2px);
     transform: translateX(-100%);
   }
 
