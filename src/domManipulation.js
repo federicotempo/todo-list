@@ -20,12 +20,24 @@ const displaySidebar = () => {
   toggleButton.addEventListener("click", () => {
     sidebar.classList.toggle("open");
   });
+};
+
+const hideSidebar = () => {
+  const toggleButton = document.querySelector("#toggle-sidebar");
+  const sidebar = document.querySelector(".sidebar");
+  const projectList = document.querySelectorAll("#project-list");
 
   document.addEventListener("click", (event) => {
     if (!sidebar.contains(event.target) && event.target !== toggleButton) {
       sidebar.classList.remove("open");
     }
   });
+
+  projectList.forEach((project) => {
+    project.addEventListener("click", () => {
+      sidebar.classList.remove("open");
+    });
+  });
 };
 
-export { renderProjectList, displaySidebar };
+export { renderProjectList, displaySidebar, hideSidebar };
