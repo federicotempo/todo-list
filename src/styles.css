@@ -109,22 +109,25 @@ main {
   overflow-y: auto;
 }
 
-main h2 {
-  margin-bottom: 1rem;
-}
-
 #project-title {
   color: #4c70af;
   font-size: 2rem;
 }
 
+h2 {
+  margin-bottom: 10px;
+}
+
 @media (max-width: 768px) {
   .sidebar {
     position: fixed;
-    top: 83.2px;
+    top: 0;
     left: 0;
-    height: calc(100vh - 83.2px);
+    width: 250px;
+    height: 100vh;
     transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    z-index: 1000;
   }
 
   .sidebar.open {
