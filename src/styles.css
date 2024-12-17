@@ -106,13 +106,14 @@ header button {
 
 main {
   flex: 1;
-  padding: 1rem;
+  padding: 0 1rem 1rem 1rem;
   overflow-y: auto;
 }
 
 #project-title {
   color: #4c70af;
   font-size: 2rem;
+  margin: 5px 0px;
 }
 
 h2 {
@@ -120,9 +121,9 @@ h2 {
 }
 
 #add-project {
-  position: absolute; 
-  bottom: 2.5rem; 
-  left: 85%; 
+  position: absolute;
+  bottom: 2.5rem;
+  left: 85%;
   transform: translateX(-50%);
   background-color: #4c70af;
   color: white;
@@ -137,8 +138,56 @@ h2 {
 }
 
 #add-project:hover {
-  background-color: #3a568c; 
-  transform: translateX(-50%) scale(1.1); 
+  background-color: #3a568c;
+  transform: translateX(-50%) scale(1.1);
+}
+
+#task-list {
+  list-style: none;
+  padding: 0;
+}
+
+#task-list li {
+  display: flex;
+  align-items: center;
+  background-color: #e4e4e4;
+  border-radius: 5px;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem 1rem;
+}
+
+#task-list li .task-title {
+  flex: 1;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+#task-list li .description {
+  color: #757575;
+  font-weight: normal;
+  margin: 0 0.5rem;
+}
+
+#task-list li .task-details {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+#task-list li .task-details .priority {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.task-delete {
+  background: none;
+  border: none;
+  color: #000000; /* Color rojo */
+  cursor: pointer;
+  font-size: 1rem;
 }
 
 @media (max-width: 768px) {
