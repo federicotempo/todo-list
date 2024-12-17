@@ -94,6 +94,7 @@ header button {
   width: 250px;
   padding: 1rem;
   transition: transform 0.3s ease;
+  position: relative;
 }
 
 .sidebar ul li {
@@ -116,6 +117,28 @@ main {
 
 h2 {
   margin-bottom: 10px;
+}
+
+#add-project {
+  position: absolute; 
+  bottom: 2.5rem; 
+  left: 85%; 
+  transform: translateX(-50%);
+  background-color: #4c70af;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+#add-project:hover {
+  background-color: #3a568c; 
+  transform: translateX(-50%) scale(1.1); 
 }
 
 @media (max-width: 768px) {
