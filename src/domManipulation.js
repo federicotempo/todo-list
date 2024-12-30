@@ -8,10 +8,31 @@ const renderProjectList = (projects) => {
   });
 };
 
-const changeProjectTitle = (title) => {
+const changeProjectTitle = (project) => {
   const projectTitle = document.querySelector("#project-title");
-  projectTitle.textContent = title.target.textContent;
+  projectTitle.textContent = project.target.textContent;
 };
+
+const chooseTodos = (projects) => {
+  console.log(projects);
+  const projectList = document.querySelector("#project-list");
+  const listProject = projectList.querySelectorAll("li");
+  listProject.forEach((li) => {
+    li.addEventListener("click", () => {
+      for (const project of projects) {
+        if (project.title === li.textContent) {
+          console.log(project);
+          renderTodo(project);
+        }
+      }
+    });
+  });
+};
+
+// const renderTodo = (project) => {
+//   const taskList = document.querySelector("#task-list");
+
+// }
 
 const renderProjectTitle = (projects) => {
   const projectTitle = document.querySelector("#project-title");
@@ -45,4 +66,10 @@ const hideSidebar = () => {
   });
 };
 
-export { renderProjectList, displaySidebar, hideSidebar, renderProjectTitle };
+export {
+  renderProjectList,
+  displaySidebar,
+  hideSidebar,
+  renderProjectTitle,
+  chooseTodos,
+};
