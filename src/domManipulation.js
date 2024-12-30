@@ -3,14 +3,19 @@ const renderProjectList = (projects) => {
   projects.forEach((project) => {
     const projectTitle = document.createElement("li");
     projectTitle.textContent = project.title;
-    projectTitle.addEventListener("click", renderProjectTitle);
+    projectTitle.addEventListener("click", changeProjectTitle);
     projectList.appendChild(projectTitle);
   });
 };
 
-const renderProjectTitle = (title) => {
+const changeProjectTitle = (title) => {
   const projectTitle = document.querySelector("#project-title");
   projectTitle.textContent = title.target.textContent;
+};
+
+const renderProjectTitle = (projects) => {
+  const projectTitle = document.querySelector("#project-title");
+  projectTitle.textContent = projects[0].title;
 };
 
 const displaySidebar = () => {
@@ -40,4 +45,4 @@ const hideSidebar = () => {
   });
 };
 
-export { renderProjectList, displaySidebar, hideSidebar };
+export { renderProjectList, displaySidebar, hideSidebar, renderProjectTitle };

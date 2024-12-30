@@ -185,7 +185,7 @@ h2 {
 .task-delete {
   background: none;
   border: none;
-  color: #000000; /* Color rojo */
+  color: #000000;
   cursor: pointer;
   font-size: 1rem;
 }
