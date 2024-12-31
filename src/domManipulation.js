@@ -68,8 +68,8 @@ const createTodo = (project) => {
   });
 };
 
-const cleanList = (taskList) => {
-  taskList.innerHTML = "";
+const cleanList = (list) => {
+  list.innerHTML = "";
 };
 
 const changePriorityColor = (priorityElement, todoPriority) => {
