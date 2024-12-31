@@ -9,6 +9,11 @@ const renderProjectList = (projects) => {
   });
 };
 
+const renderProjectTitle = (projects) => {
+  const projectTitle = document.querySelector("#project-title");
+  projectTitle.textContent = projects[0].title;
+};
+
 const changeProjectTitle = (project) => {
   const projectTitle = document.querySelector("#project-title");
   projectTitle.textContent = project.target.textContent;
@@ -65,11 +70,26 @@ const createTodo = (project) => {
     taskTitle.appendChild(description);
     task.append(taskTitle, taskDetails);
     taskList.appendChild(task);
+    handleDeleteButton();
   });
+};
+
+const getTodos = () => {
+  const taskList = document.querySelector("#task-list");
+  return taskList;
 };
 
 const cleanList = (list) => {
   list.innerHTML = "";
+};
+
+const handleDeleteButton = () => {
+  const taskList = getTodos();
+  const tasks = taskList.querySelectorAll("li")
+  tasks.forEach((task) => {
+    const deleteButton = task.querySelector(".task-delete");
+    deleteButton.addEventListener("click", () => task.remove());
+  });
 };
 
 const choosePriorityColor = (todoPriority) => {
@@ -80,11 +100,6 @@ const choosePriorityColor = (todoPriority) => {
   } else {
     return "green";
   }
-};
-
-const renderProjectTitle = (projects) => {
-  const projectTitle = document.querySelector("#project-title");
-  projectTitle.textContent = projects[0].title;
 };
 
 const displaySidebar = () => {
@@ -114,11 +129,6 @@ const hideSidebar = () => {
   });
 };
 
-const getTodos = () => {
-  const taskList = document.querySelector("#task-list");
-  return taskList;
-};
-
 export {
   renderProjectList,
   displaySidebar,
@@ -126,4 +136,5 @@ export {
   renderProjectTitle,
   renderTodos,
   createTodo,
+  getTodos,
 };
