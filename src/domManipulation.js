@@ -50,6 +50,8 @@ const createTodo = (project) => {
 
     const priority = document.createElement("span");
     priority.classList.add("priority");
+    const priorityColor = choosePriorityColor(todo.priority);
+    priority.style.backgroundColor = priorityColor;
 
     const date = document.createElement("span");
     date.classList.add("date");
@@ -64,7 +66,7 @@ const createTodo = (project) => {
     task.append(taskTitle, taskDetails);
     taskList.appendChild(task);
 
-    changePriorityColor(priority, todo.priority);
+    
   });
 };
 
@@ -72,13 +74,13 @@ const cleanList = (list) => {
   list.innerHTML = "";
 };
 
-const changePriorityColor = (priorityElement, todoPriority) => {
+const choosePriorityColor = (todoPriority) => {
   if (todoPriority === "High") {
-    priorityElement.style.backgroundColor = "red";
+    return "red";
   } else if (todoPriority === "Medium") {
-    priorityElement.style.backgroundColor = "yellow";
+    return "yellow";
   } else {
-    priorityElement.style.backgroundColor = "green";
+    return "green";
   }
 };
 
@@ -113,6 +115,10 @@ const hideSidebar = () => {
     });
   });
 };
+
+const changePriority = () =>{
+
+}
 
 export {
   renderProjectList,
