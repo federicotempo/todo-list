@@ -30,7 +30,7 @@ const renderTodos = (projects) => {
 };
 
 const createTodo = (project) => {
-  const taskList = document.querySelector("#task-list");
+  const taskList = getTodos();
   cleanList(taskList);
 
   project.todos.forEach((todo) => {
@@ -65,8 +65,6 @@ const createTodo = (project) => {
     taskTitle.appendChild(description);
     task.append(taskTitle, taskDetails);
     taskList.appendChild(task);
-
-    
   });
 };
 
@@ -116,9 +114,10 @@ const hideSidebar = () => {
   });
 };
 
-const changePriority = () =>{
-
-}
+const getTodos = () => {
+  const taskList = document.querySelector("#task-list");
+  return taskList;
+};
 
 export {
   renderProjectList,
