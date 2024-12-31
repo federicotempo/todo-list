@@ -1,6 +1,6 @@
 const renderProjectList = (projects) => {
   const projectList = document.querySelector("#project-list");
-  
+
   projects.forEach((project) => {
     const projectTitle = document.createElement("li");
     projectTitle.textContent = project.title;
@@ -17,7 +17,7 @@ const changeProjectTitle = (project) => {
 const renderTodos = (projects) => {
   const projectList = document.querySelector("#project-list");
   const listProject = projectList.querySelectorAll("li");
-  
+
   listProject.forEach((li) => {
     li.addEventListener("click", () => {
       for (const project of projects) {
@@ -72,7 +72,7 @@ const cleanList = (taskList) => {
   taskList.innerHTML = "";
 };
 
-const changePriorityColor = (priorityElement, todoPriority) => {;
+const changePriorityColor = (priorityElement, todoPriority) => {
   if (todoPriority === "High") {
     priorityElement.style.backgroundColor = "red";
   } else if (todoPriority === "Medium") {
@@ -120,4 +120,5 @@ export {
   hideSidebar,
   renderProjectTitle,
   renderTodos,
+  createTodo,
 };
