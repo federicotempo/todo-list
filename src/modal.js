@@ -54,7 +54,9 @@ addProjectForm.addEventListener("submit", (event) => {
 
     newProject.addTodo(newTodo);
     projects.push(newProject);
+    projectsTitles.push(projectName);
     console.log(projects);
+    renderProjectList(projects);
     closeModal();
   }
 });
