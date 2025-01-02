@@ -122,6 +122,47 @@ const hideSidebar = () => {
   });
 };
 
+const handleDeleteTask = () => {
+  const deleteButtons = document.querySelectorAll(
+    ".task .task-details .task-delete"
+  );
+  deleteButtons.forEach((button) => {
+    button.addEventListener("click", (event) => deleteTask(event));
+  });
+};
+
+const deleteTask = (event) => {
+  const projectTitle = document.querySelector("#project-title").textContent;
+  const task = event.target.closest(".task");
+  const taskDetails = task.querySelector(".task-title");
+  const span = taskDetails.querySelector("span");
+  const taskTitle = taskDetails.textContent
+    .replace(span.textContent, "")
+    .trim();
+
+  if (task) {
+    task.remove();
+  }
+
+  projects.forEach((project) => {
+    if (project.title === projectTitle) {
+      project.todos = project.todos.filter((todo) => todo.title !== taskTitle);
+    }
+  });
+
+  if (projectTitle === "Pending") {
+    projects.forEach((project) => {
+      for (const todo of project.todos) {
+        if (todo.title === taskTitle) {
+          project.todos = project.todos.filter(
+            (task) => task.title !== taskTitle
+          );
+        }
+      }
+    });
+  }
+};
+
 export {
   renderProjectList,
   displaySidebar,
@@ -129,4 +170,5 @@ export {
   renderProjectTitle,
   createTodo,
   renderNewProjectTitle,
+  handleDeleteTask,
 };
