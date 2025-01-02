@@ -1,5 +1,5 @@
 import { renderProjectList } from "./domManipulation";
-import { projects, Project, Todo } from "./logic";
+import { projects, Project, Todo, addPendingProjects } from "./logic";
 
 const modal = document.getElementById("modal");
 const addProjectButton = document.getElementById("add-project");
@@ -57,6 +57,7 @@ addProjectForm.addEventListener("submit", (event) => {
     projectsTitles.push(projectName);
     console.log(projects);
     renderProjectList(projects);
+    addPendingProjects();
     closeModal();
   }
 });
