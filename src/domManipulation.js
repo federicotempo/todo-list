@@ -1,5 +1,8 @@
+import { projects } from "./logic";
+
 const renderProjectList = (projects) => {
   const projectList = document.querySelector("#project-list");
+  cleanList(projectList);
 
   projects.forEach((project) => {
     const projectTitle = document.createElement("li");
@@ -14,23 +17,23 @@ const renderProjectTitle = (projects) => {
   projectTitle.textContent = projects[0].title;
 };
 
+const renderNewProjectTitle = (project) => {
+  const projectTitle = document.querySelector("#project-title");
+  projectTitle.textContent = project;
+};
+
 const changeProjectTitle = (project) => {
   const projectTitle = document.querySelector("#project-title");
   projectTitle.textContent = project.target.textContent;
+  renderTodos(project);
+  console.log(projects);
 };
 
-const renderTodos = (projects) => {
-  const projectList = document.querySelector("#project-list");
-  const listProject = projectList.querySelectorAll("li");
-
-  listProject.forEach((li) => {
-    li.addEventListener("click", () => {
-      for (const project of projects) {
-        if (project.title === li.textContent) {
-          createTodo(project);
-        }
-      }
-    });
+const renderTodos = (projectName) => {
+  projects.forEach((project) => {
+    if (projectName.target.textContent === project.title) {
+      createTodo(project);
+    }
   });
 };
 
@@ -70,7 +73,6 @@ const createTodo = (project) => {
     taskTitle.appendChild(description);
     task.append(taskTitle, taskDetails);
     taskList.appendChild(task);
-    handleDeleteButton();
   });
 };
 
@@ -81,15 +83,6 @@ const getTodos = () => {
 
 const cleanList = (list) => {
   list.innerHTML = "";
-};
-
-const handleDeleteButton = () => {
-  const taskList = getTodos();
-  const tasks = taskList.querySelectorAll("li")
-  tasks.forEach((task) => {
-    const deleteButton = task.querySelector(".task-delete");
-    deleteButton.addEventListener("click", () => task.remove());
-  });
 };
 
 const choosePriorityColor = (todoPriority) => {
@@ -134,7 +127,6 @@ export {
   displaySidebar,
   hideSidebar,
   renderProjectTitle,
-  renderTodos,
   createTodo,
-  getTodos,
+  renderNewProjectTitle,
 };
