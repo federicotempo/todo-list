@@ -21,5 +21,36 @@
         <ul id="task-list"></ul>
       </main>
     </div>
+
+    <div id="modal" class="hidden">
+      <div class="modal-content">
+        <h2>Add New Task</h2>
+        <form id="add-project-form">
+          <label for="project-name">Project Name:</label>
+          <input type="text" id="project-name" required maxlength="25" />
+
+          <label for="todo-title">Task Title:</label>
+          <input type="text" id="todo-title" required  maxlength="25"/>
+
+          <label for="todo-description">Description:</label>
+          <textarea id="todo-description" required></textarea>
+
+          <label for="todo-due-date">Due Date:</label>
+          <input type="date" id="todo-due-date" required />
+
+          <label for="todo-priority">Priority:</label>
+          <select id="todo-priority">
+            <option value="High">High</option>
+            <option value="Medium">Medium</option>
+            <option value="Low">Low</option>
+          </select>
+
+          <div class="modal-actions">
+            <button type="submit" id="submit-modal">Add</button>
+            <button type="button" id="cancel-modal">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
   </body>
 </html>
