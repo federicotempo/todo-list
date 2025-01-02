@@ -21,12 +21,13 @@
         <ul id="task-list"></ul>
       </main>
     </div>
-
+  
     <div id="modal" class="hidden">
       <div class="modal-content">
         <h2>Add New Task</h2>
         <form id="add-project-form">
           <label for="project-name">Project Name:</label>
+          <div id="error-message" class="hidden" style="color: red;"></div>
           <input type="text" id="project-name" required maxlength="25" />
 
           <label for="todo-title">Task Title:</label>
@@ -50,6 +51,7 @@
             <button type="button" id="cancel-modal">Cancel</button>
           </div>
         </form>
+        
       </div>
     </div>
   </body>
