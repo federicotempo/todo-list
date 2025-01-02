@@ -69,7 +69,7 @@ function initialize() {
   dom.hideSidebar();
   addPendingProjects();
   dom.createTodo(pendingProject);
-  dom.handleDeleteTask();
+  
 }
 
 initialize();

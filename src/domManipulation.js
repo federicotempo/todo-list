@@ -73,6 +73,8 @@ const createTodo = (project) => {
     taskTitle.appendChild(description);
     task.append(taskTitle, taskDetails);
     taskList.appendChild(task);
+
+    handleDeleteTask();
   });
 };
 
@@ -160,6 +162,18 @@ const deleteTask = (event) => {
         }
       }
     });
+  } else {
+    const pendingProject = projects.find(
+      (project) => project.title === "Pending"
+    );
+
+    pendingProject.todos = pendingProject.todos.filter((todo) => todo.title !== taskTitle);
+    // for (const tasks of pendingProject.todos) {
+    //   console.log(tasks.title);
+    //   if (tasks.title === taskTitle) {
+    //     pendingProject.todos =
+      // }
+    // }
   }
 };
 
