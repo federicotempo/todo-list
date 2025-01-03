@@ -1,26 +1,42 @@
-// import { Project, Todo, projects } from "./logic";
+import {
+  projects,
+  Project,
+  Todo,
+  pendingProject,
+  workProject,
+  personalProject,
+} from "./logic";
 
-// function saveProjectsToLocalStorage() {
-//   localStorage.setItem("projects", JSON.stringify(projects));
-// }
+import { renderProjectList } from "./domManipulation";
 
-// function loadProjectsFromLocalStorage() {
-//   const storedProjects = JSON.parse(localStorage.getItem("projects"));
-//   if (storedProjects) {
-//     storedProjects.forEach((projectData) => {
-//       const project = new Project(projectData.title);
-//       projectData.todos.forEach((todoData) => {
-//         const todo = new Todo(
-//           todoData.title,
-//           todoData.description,
-//           todoData.dueDate,
-//           todoData.priority
-//         );
-//         project.addTodo(todo)
-//       });
-//       projects.push(project);
-//     });
-//   }
-// }
+const saveToLocalStorage = () => {
+  localStorage.setItem("projects", JSON.stringify(projects));
+};
 
-// export { saveProjectsToLocalStorage, loadProjectsFromLocalStorage }
+const loadProjectsFromLocalStorage = () => {
+  const savedProjects = localStorage.getItem("projects");
+
+  if (savedProjects) {
+    const parsedProjects = JSON.parse(savedProjects);
+    parsedProjects.forEach((projectData) => {
+      const project = new Project(projectData.title);
+      projectData.todos.forEach((todoData) => {
+        const todo = new Todo(
+          todoData.title,
+          todoData.description,
+          todoData.dueDate,
+          todoData.priority
+        );
+        project.addTodo(todo);
+      });
+      projects.push(project);
+    });
+  } else {
+    projects.push(pendingProject);
+    projects.push(workProject);
+    projects.push(personalProject);
+  }
+  renderProjectList(projects);
+};
+
+export { saveToLocalStorage, loadProjectsFromLocalStorage };

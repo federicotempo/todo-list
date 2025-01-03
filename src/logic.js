@@ -19,15 +19,8 @@ class Todo {
   constructor(title, description, dueDate, priority) {
     this.title = title;
     this.description = description;
-    this.dueDate = this.formatDate(dueDate);
+    this.dueDate = dueDate;
     this.priority = priority;
-  }
-
-  formatDate(dateString) {
-    const date = parseISO(dateString);
-    const month = format(date, "MMMM");
-    const dayWithOrdinal = addOrdinal(date.getDate());
-    return `${month} ${dayWithOrdinal}`;
   }
 }
 
@@ -60,10 +53,6 @@ workProject.addTodo(todo1);
 workProject.addTodo(todo2);
 personalProject.addTodo(todo3);
 
-projects.push(pendingProject);
-projects.push(workProject);
-projects.push(personalProject);
-
 const addPendingProjects = () => {
   pendingProject.todos.length = 0;
   projects.slice(1).forEach((project) => {
@@ -71,19 +60,9 @@ const addPendingProjects = () => {
   });
 };
 
-function addOrdinal(day) {
-  const lastDigit = day % 10;
-  const lastTwoDigits = day % 100;
-
-  if (lastTwoDigits >= 11 && lastTwoDigits <= 13) return `${day}th`;
-  if (lastDigit === 1) return `${day}st`;
-  if (lastDigit === 2) return `${day}nd`;
-  if (lastDigit === 3) return `${day}rd`;
-
-  return `${day}th`;
-}
-
 function initialize() {
+  loadProjectsFromLocalStorage();
+
   dom.renderProjectList(projects);
   dom.renderProjectTitle(projects);
   dom.displaySidebar();
@@ -92,10 +71,14 @@ function initialize() {
   dom.createTodo(workProject);
 }
 
-// window.addEventListener("load", () => {
-//   loadProjectsFromLocalStorage()
-// });
-
 initialize();
 
-export { projects, Project, Todo, addPendingProjects };
+export {
+  projects,
+  Project,
+  Todo,
+  addPendingProjects,
+  workProject,
+  pendingProject,
+  personalProject,
+};

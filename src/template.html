@@ -31,14 +31,21 @@
           <select name="project-name" id="project-name">
             <option value="new">New project...</option>
           </select>
-          <input type="text" id="new-project-name"  
-          name="new-project-name" placeholder="Enter new project name" style="display:none;"/>
+          <input
+            type="text"
+            id="new-project-name"
+            name="new-project-name"
+            placeholder="Enter new project name"
+            style="display: none"
+            required
+            maxlength="25"
+          />
 
           <label for="todo-title">Task Title:</label>
           <input type="text" id="todo-title" required maxlength="25" />
 
           <label for="todo-description">Description:</label>
-          <textarea id="todo-description" required></textarea>
+          <textarea id="todo-description" required maxlength="100"></textarea>
 
           <label for="todo-due-date">Due Date:</label>
           <input type="date" id="todo-due-date" required />

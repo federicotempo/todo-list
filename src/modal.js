@@ -4,7 +4,7 @@ import {
   createTodo,
 } from "./domManipulation";
 import { projects, Project, Todo, addPendingProjects } from "./logic";
-import { saveProjectsToLocalStorage } from "./localStorage";
+import { saveToLocalStorage } from "./localStorage";
 
 const modal = document.getElementById("modal");
 const addProjectButton = document.getElementById("add-project");
@@ -60,6 +60,8 @@ const populateProjectSelect = () => {
   if (remainingProjects.length === 0) {
     projectNameSelect.value = "new";
   }
+
+  saveToLocalStorage();
 };
 
 projectNameSelect.addEventListener("change", () => {
@@ -110,12 +112,14 @@ addProjectForm.addEventListener("submit", (event) => {
     projects.push(newProject);
     renderNewProjectTitle(newProjectName);
     createTodo(newProject);
+    saveToLocalStorage();
   } else {
     const existingProject = projects.find((p) => p.title === projectName);
     if (existingProject) {
       existingProject.todos.push(newTodo);
       renderNewProjectTitle(projectName);
       createTodo(existingProject);
+      saveToLocalStorage();
     }
   }
 

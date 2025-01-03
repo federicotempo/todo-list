@@ -1,5 +1,6 @@
 import { projects } from "./logic";
 import { populateProjectSelect } from "./modal";
+import { saveToLocalStorage } from "./localStorage";
 
 const renderProjectList = (projects) => {
   const projectList = document.querySelector("#project-list");
@@ -15,7 +16,7 @@ const renderProjectList = (projects) => {
 
 const renderProjectTitle = (projects) => {
   const projectTitle = document.querySelector("#project-title");
-  projectTitle.textContent = projects[1].title;
+  projectTitle.textContent = projects[0].title;
 };
 
 const renderNewProjectTitle = (project) => {
@@ -194,12 +195,13 @@ const deleteProject = () => {
   const index = projects.findIndex((project) => project.title === projectTitle);
   if (index !== -1) {
     projects.splice(index, 1);
-    
+
     renderProjectList(projects);
     renderProjectTitle(projects);
     createTodo(projects[0]);
-    
+
     populateProjectSelect();
+    saveToLocalStorage();
   }
 };
 
