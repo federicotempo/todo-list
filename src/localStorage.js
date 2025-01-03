@@ -5,6 +5,7 @@ import {
   pendingProject,
   workProject,
   personalProject,
+  addPendingProjects,
 } from "./logic";
 
 import { renderProjectList } from "./domManipulation";
@@ -32,11 +33,13 @@ const loadProjectsFromLocalStorage = () => {
       projects.push(project);
     });
   } else {
+    addPendingProjects();
     projects.push(pendingProject);
     projects.push(workProject);
     projects.push(personalProject);
+    
   }
-  renderProjectList(projects);
+  
 };
 
 export { saveToLocalStorage, loadProjectsFromLocalStorage };

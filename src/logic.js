@@ -1,5 +1,4 @@
 import * as dom from "./domManipulation";
-import { format, parseISO } from "date-fns";
 import { loadProjectsFromLocalStorage } from "./localStorage";
 
 const projects = [];
@@ -68,7 +67,7 @@ function initialize() {
   dom.displaySidebar();
   dom.hideSidebar();
   addPendingProjects();
-  dom.createTodo(workProject);
+  dom.createTodo(pendingProject);
 }
 
 initialize();

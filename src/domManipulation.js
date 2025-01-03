@@ -1,6 +1,7 @@
 import { projects } from "./logic";
 import { populateProjectSelect } from "./modal";
 import { saveToLocalStorage } from "./localStorage";
+import { formatDate } from "./formatDate";
 
 const renderProjectList = (projects) => {
   const projectList = document.querySelector("#project-list");
@@ -64,7 +65,7 @@ const createTodo = (project) => {
 
     const date = document.createElement("span");
     date.classList.add("date");
-    date.textContent = todo.dueDate;
+    date.textContent = formatDate(todo.dueDate);
 
     const taskDelete = document.createElement("button");
     taskDelete.classList.add("task-delete");
