@@ -29,22 +29,22 @@ class Todo {
 }
 
 const todo1 = new Todo(
-  "Finish report",
-  "Complete the monthly report",
+  "Plan team meeting",
+  "Schedule and prepare the agenda for next week's team meeting",
   "2024-12-15",
   "High"
 );
 
 const todo2 = new Todo(
-  "Finish time",
-  "Complete the week report",
+  "Prepare presentation",
+  "Create slides for the annual project review presentation",
   "2024-12-16",
   "Low"
 );
 
 const todo3 = new Todo(
-  "Clean the dishes",
-  "Get the house clean",
+  "Call mom",
+  "Catch up with mom and check on her health",
   "2024-12-10",
   "Medium"
 );
@@ -80,4 +80,4 @@ function initialize() {
 
 initialize();
 
-export {projects, Project, Todo, addPendingProjects }
+export {projects, Project, Todo, addPendingProjects,}
