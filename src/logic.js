@@ -1,4 +1,5 @@
 import * as dom from "./domManipulation";
+import { format, parseISO } from "date-fns"
 
 const projects = [];
 
@@ -17,29 +18,34 @@ class Todo {
   constructor(title, description, dueDate, priority) {
     this.title = title;
     this.description = description;
-    this.dueDate = dueDate;
+    this.dueDate = this.formatDate(dueDate);
     this.priority = priority;
+  }
+
+  formatDate (dateString) {
+    const date = parseISO(dateString);
+    return format(date, "MMMM do")
   }
 }
 
 const todo1 = new Todo(
   "Finish report",
   "Complete the monthly report",
-  "2024/12/15",
+  "2024-12-15",
   "High"
 );
 
 const todo2 = new Todo(
   "Finish time",
   "Complete the week report",
-  "2024/12/16",
+  "2024-12-16",
   "Low"
 );
 
 const todo3 = new Todo(
   "Clean the dishes",
   "Get the house clean",
-  "2024/12/10",
+  "2024-12-10",
   "Medium"
 );
 
