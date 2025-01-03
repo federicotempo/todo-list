@@ -1,4 +1,5 @@
 import { projects } from "./logic";
+import { populateProjectSelect } from "./modal";
 
 const renderProjectList = (projects) => {
   const projectList = document.querySelector("#project-list");
@@ -14,7 +15,7 @@ const renderProjectList = (projects) => {
 
 const renderProjectTitle = (projects) => {
   const projectTitle = document.querySelector("#project-title");
-  projectTitle.textContent = projects[0].title;
+  projectTitle.textContent = projects[1].title;
 };
 
 const renderNewProjectTitle = (project) => {
@@ -26,7 +27,6 @@ const changeProjectTitle = (project) => {
   const projectTitle = document.querySelector("#project-title");
   projectTitle.textContent = project.target.textContent;
   renderTodos(project);
-  console.log(projects);
 };
 
 const renderTodos = (projectName) => {
@@ -152,7 +152,7 @@ const deleteTask = (event) => {
     }
   });
 
-  if (projectTitle === "Pending") {
+  if (projectTitle === "Pending Tasks") {
     projects.forEach((project) => {
       for (const todo of project.todos) {
         if (todo.title === taskTitle) {
@@ -164,12 +164,42 @@ const deleteTask = (event) => {
     });
   } else {
     const pendingProject = projects.find(
-      (project) => project.title === "Pending"
+      (project) => project.title === "Pending Tasks"
     );
 
     pendingProject.todos = pendingProject.todos.filter(
       (todo) => todo.title !== taskTitle
     );
+  }
+
+  if (projectTitle !== "Pending Tasks") {
+    const remainingTasks = checkRemainingTasks();
+    if (remainingTasks === 0) {
+      deleteProject();
+    }
+  }
+
+  console.log(projects);
+};
+
+const checkRemainingTasks = () => {
+  const taskList = getTodos();
+  const tasks = taskList.querySelectorAll("li");
+  return tasks.length;
+};
+
+const deleteProject = () => {
+  const projectTitle = document.querySelector("#project-title").textContent;
+
+  const index = projects.findIndex((project) => project.title === projectTitle);
+  if (index !== -1) {
+    projects.splice(index, 1);
+    
+    renderProjectList(projects);
+    renderProjectTitle(projects);
+    createTodo(projects[0]);
+    
+    populateProjectSelect();
   }
 };
 

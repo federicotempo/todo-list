@@ -4,6 +4,7 @@ import {
   createTodo,
 } from "./domManipulation";
 import { projects, Project, Todo, addPendingProjects } from "./logic";
+import { saveProjectsToLocalStorage } from "./localStorage";
 
 const modal = document.getElementById("modal");
 const addProjectButton = document.getElementById("add-project");
@@ -40,19 +41,25 @@ window.addEventListener("click", (event) => {
 const populateProjectSelect = () => {
   projectNameSelect.innerHTML = "";
 
-  projects.forEach((project) => {
-    if (project.title !== "Pending") {
-      const option = document.createElement("option");
-      option.value = project.title;
-      option.text = project.title;
-      projectNameSelect.appendChild(option);
-    }
+  const remainingProjects = projects.filter(
+    (project) => project.title !== "Pending Tasks"
+  );
+
+  remainingProjects.forEach((project) => {
+    const option = document.createElement("option");
+    option.value = project.title;
+    option.text = project.title;
+    projectNameSelect.appendChild(option);
   });
 
   const newOption = document.createElement("option");
   newOption.value = "new";
   newOption.text = "New project...";
   projectNameSelect.appendChild(newOption);
+
+  if (remainingProjects.length === 0) {
+    projectNameSelect.value = "new";
+  }
 };
 
 projectNameSelect.addEventListener("change", () => {
@@ -117,3 +124,5 @@ addProjectForm.addEventListener("submit", (event) => {
   populateProjectSelect();
   closeModal();
 });
+
+export { populateProjectSelect };

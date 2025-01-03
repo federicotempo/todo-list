@@ -1,5 +1,6 @@
 import * as dom from "./domManipulation";
 import { format, parseISO } from "date-fns";
+import { loadProjectsFromLocalStorage } from "./localStorage";
 
 const projects = [];
 
@@ -25,8 +26,8 @@ class Todo {
   formatDate(dateString) {
     const date = parseISO(dateString);
     const month = format(date, "MMMM");
-    const dayWithOrdinal = addOrdinal(date.getDate()); 
-    return `${month} ${dayWithOrdinal}`; 
+    const dayWithOrdinal = addOrdinal(date.getDate());
+    return `${month} ${dayWithOrdinal}`;
   }
 }
 
@@ -51,7 +52,7 @@ const todo3 = new Todo(
   "Medium"
 );
 
-const pendingProject = new Project("Pending");
+const pendingProject = new Project("Pending Tasks");
 const workProject = new Project("Work");
 const personalProject = new Project("Personal");
 
@@ -88,8 +89,12 @@ function initialize() {
   dom.displaySidebar();
   dom.hideSidebar();
   addPendingProjects();
-  dom.createTodo(pendingProject);
+  dom.createTodo(workProject);
 }
+
+// window.addEventListener("load", () => {
+//   loadProjectsFromLocalStorage()
+// });
 
 initialize();
 
