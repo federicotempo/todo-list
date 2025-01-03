@@ -41,10 +41,12 @@ const populateProjectSelect = () => {
   projectNameSelect.innerHTML = "";
 
   projects.forEach((project) => {
-    const option = document.createElement("option");
-    option.value = project.title;
-    option.text = project.title;
-    projectNameSelect.appendChild(option);
+    if (project.title !== "Pending") {
+      const option = document.createElement("option");
+      option.value = project.title;
+      option.text = project.title;
+      projectNameSelect.appendChild(option);
+    }
   });
 
   const newOption = document.createElement("option");

@@ -167,13 +167,9 @@ const deleteTask = (event) => {
       (project) => project.title === "Pending"
     );
 
-    pendingProject.todos = pendingProject.todos.filter((todo) => todo.title !== taskTitle);
-    // for (const tasks of pendingProject.todos) {
-    //   console.log(tasks.title);
-    //   if (tasks.title === taskTitle) {
-    //     pendingProject.todos =
-      // }
-    // }
+    pendingProject.todos = pendingProject.todos.filter(
+      (todo) => todo.title !== taskTitle
+    );
   }
 };
 
