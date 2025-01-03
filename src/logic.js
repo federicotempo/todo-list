@@ -1,5 +1,5 @@
 import * as dom from "./domManipulation";
-import { format, parseISO } from "date-fns"
+import { format, parseISO } from "date-fns";
 
 const projects = [];
 
@@ -22,30 +22,32 @@ class Todo {
     this.priority = priority;
   }
 
-  formatDate (dateString) {
+  formatDate(dateString) {
     const date = parseISO(dateString);
-    return format(date, "MMMM do")
+    const month = format(date, "MMMM");
+    const dayWithOrdinal = addOrdinal(date.getDate()); 
+    return `${month} ${dayWithOrdinal}`; 
   }
 }
 
 const todo1 = new Todo(
   "Plan team meeting",
   "Schedule and prepare the agenda for next week's team meeting",
-  "2024-12-15",
+  "2024-11-01",
   "High"
 );
 
 const todo2 = new Todo(
   "Prepare presentation",
   "Create slides for the annual project review presentation",
-  "2024-12-16",
+  "2024-12-03",
   "Low"
 );
 
 const todo3 = new Todo(
   "Call mom",
   "Catch up with mom and check on her health",
-  "2024-12-10",
+  "2024-02-10",
   "Medium"
 );
 
@@ -68,6 +70,18 @@ const addPendingProjects = () => {
   });
 };
 
+function addOrdinal(day) {
+  const lastDigit = day % 10;
+  const lastTwoDigits = day % 100;
+
+  if (lastTwoDigits >= 11 && lastTwoDigits <= 13) return `${day}th`;
+  if (lastDigit === 1) return `${day}st`;
+  if (lastDigit === 2) return `${day}nd`;
+  if (lastDigit === 3) return `${day}rd`;
+
+  return `${day}th`;
+}
+
 function initialize() {
   dom.renderProjectList(projects);
   dom.renderProjectTitle(projects);
@@ -75,9 +89,8 @@ function initialize() {
   dom.hideSidebar();
   addPendingProjects();
   dom.createTodo(pendingProject);
-  
 }
 
 initialize();
 
-export {projects, Project, Todo, addPendingProjects,}
+export { projects, Project, Todo, addPendingProjects };
