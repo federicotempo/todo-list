@@ -155,12 +155,16 @@ const deleteTask = (event) => {
   });
 
   if (projectTitle === "Pending Tasks") {
-    projects.forEach((project) => {
+    projects.forEach((project, index) => {
       for (const todo of project.todos) {
         if (todo.title === taskTitle) {
           project.todos = project.todos.filter(
             (task) => task.title !== taskTitle
           );
+          if (project.todos.length === 0) {
+            projects.splice(index, 1);
+            renderProjectList(projects);
+          }
         }
       }
     });
@@ -180,8 +184,7 @@ const deleteTask = (event) => {
       deleteProject();
     }
   }
-
-  console.log(projects);
+  saveToLocalStorage();
 };
 
 const checkRemainingTasks = () => {

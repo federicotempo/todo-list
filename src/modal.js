@@ -6,7 +6,6 @@ import {
 import { projects, Project, Todo, addPendingProjects } from "./logic";
 import { saveToLocalStorage } from "./localStorage";
 
-
 const modal = document.getElementById("modal");
 const addProjectButton = document.getElementById("add-project");
 const cancelModalButton = document.getElementById("cancel-modal");
@@ -28,6 +27,7 @@ const resetForm = () => {
   addProjectForm.reset();
   errorMessage.classList.add("hidden");
   newProjectNameInput.style.display = "none";
+  newProjectNameInput.required = false;
 };
 
 addProjectButton.addEventListener("click", openModal);
@@ -42,8 +42,18 @@ window.addEventListener("click", (event) => {
 const populateProjectSelect = () => {
   projectNameSelect.innerHTML = "";
 
+  const defaultProjects = ["Work", "Personal"];
+  defaultProjects.forEach((projectTitle) => {
+    const option = document.createElement("option");
+    option.value = projectTitle;
+    option.text = projectTitle;
+    projectNameSelect.appendChild(option);
+  });
+
   const remainingProjects = projects.filter(
-    (project) => project.title !== "Pending Tasks"
+    (project) =>
+      project.title !== "Pending Tasks" &&
+      !defaultProjects.includes(project.title)
   );
 
   remainingProjects.forEach((project) => {
@@ -59,21 +69,21 @@ const populateProjectSelect = () => {
   projectNameSelect.appendChild(newOption);
 
   if (remainingProjects.length === 0) {
-    projectNameSelect.value = "new";
-  }
+    projectNameSelect.value = "Work";
+  } 
 
+  projectNameSelect.value = "Work";
+  
   saveToLocalStorage();
 };
 
 projectNameSelect.addEventListener("change", () => {
   if (projectNameSelect.value === "new") {
-    newProjectNameInput.style.display = "inline-block";
-    newProjectNameInput.setAttribute("name", "new-project-name");
-    newProjectNameInput.setAttribute("required", "true");
+    newProjectNameInput.style.display = "block";
+    newProjectNameInput.required = true;
   } else {
     newProjectNameInput.style.display = "none";
-    newProjectNameInput.removeAttribute("name");
-    newProjectNameInput.removeAttribute("required");
+    newProjectNameInput.required = false;
   }
 });
 
@@ -88,6 +98,12 @@ addProjectForm.addEventListener("submit", (event) => {
   const todoDescription = document.getElementById("todo-description").value;
   const todoDueDate = document.getElementById("todo-due-date").value;
   const todoPriority = document.getElementById("todo-priority").value;
+
+  if (projectName === "new" && newProjectName === "") {
+    errorMessage.textContent = "Please enter a project name.";
+    errorMessage.classList.remove("hidden");
+    return;
+  }
 
   const newTodo = new Todo(
     todoTitle,
@@ -113,17 +129,18 @@ addProjectForm.addEventListener("submit", (event) => {
     projects.push(newProject);
     renderNewProjectTitle(newProjectName);
     createTodo(newProject);
-    saveToLocalStorage()
   } else {
-    const existingProject = projects.find((p) => p.title === projectName);
-    if (existingProject) {
-      existingProject.todos.push(newTodo);
-      renderNewProjectTitle(projectName);
-      createTodo(existingProject);
-      saveToLocalStorage()
+    let existingProject = projects.find((p) => p.title === projectName);
+    if (!existingProject) {
+      existingProject = new Project(projectName);
+      projects.push(existingProject);
     }
+    existingProject.todos.push(newTodo);
+    renderNewProjectTitle(projectName);
+    createTodo(existingProject);
   }
 
+  saveToLocalStorage();
   renderProjectList(projects);
   addPendingProjects();
   populateProjectSelect();
